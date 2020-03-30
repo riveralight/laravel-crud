@@ -19,7 +19,7 @@ Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/postlogin', 'AuthController@postLogin');
 Route::get('/logout', 'AuthController@logout');
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => ['auth', 'checkRole:admin']], function(){
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/siswa', 'SiswaController@index');
     Route::post('/siswa/create', 'SiswaController@create');
@@ -27,5 +27,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::patch('/siswa/{siswa}', 'SiswaController@update')->name('siswa.update');
     Route::get('/siswa/{id}/hapus', 'SiswaController@delete');
     Route::get('/siswa/{id}/profile', 'SiswaController@profile');
-
 });
+
+Route::group(['middleware' => ['auth', 'checkRole:admin,siswa']], function(){
+    Route::get('/dashboard', 'DashboardController@index');
+});
+
+
