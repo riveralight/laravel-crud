@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 use App\Siswa;
 use App\User;
 
@@ -19,6 +20,22 @@ class SiswaController extends Controller
     }
 
     public function create(Request $request){
+        $validator = Validator::make($request->all(), [
+            'nama_depan'    => 'required|min:3',
+            'email'         => 'required|email|unique:users',
+            'jenis_kelamin' => 'required|in:P,L',
+            'agama'         => 'required',
+        ],
+        [
+            'required'      => ':attribute wajib diisi',
+            'min'           => ':attribute minimal berisi :min karakter',
+            'email'         => ':harus diisi dengan format email yang valid',
+            'in'            => ':attribute yang dipilih tidak valid',
+        ]);
+        if($validator->fails()){
+            return redirect('/siswa')->withErrors($validator)->withInput();
+        }
+
         //insert ke table user
         $user = new User;
         $user->role = 'siswa';
@@ -32,7 +49,7 @@ class SiswaController extends Controller
         $request->request->add(['user_id' => $user->id]);
         $siswa = Siswa::create($request->all());
 
-        return redirect('/siswa')->with('sukses', "Data berhasil di tambahkan!");
+        return redirect('/siswa')->with('pesan', "Data berhasil di tambahkan!");
     }
 
     public function edit($id){

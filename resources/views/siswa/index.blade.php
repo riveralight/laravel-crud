@@ -18,6 +18,12 @@
                                     </button> -->
                                 </div>
                             </div>
+                            @if(session()->has('pesan'))
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <i class="fa fa-check-circle"></i> {{session()->get('pesan')}}
+                                </div>
+                            @endif
                             <div class="panel-body">
                                 <table class="table table-hover">
                                     <thead>
@@ -75,30 +81,39 @@
                     @csrf
                     <div class="form-group">
                         <label for="nama_depan">Nama Depan</label>
-                        <input type="text" name="nama_depan" class="form-control" id="nama_depan">
+                        <input type="text" name="nama_depan" class="form-control @error('nama_depan') has-error @enderror" id="nama_depan" value="{{ old('nama_depan') }}">
+                        @error('nama_depan')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="nama_belakang">Nama Belakang</label>
-                        <input type="text" name="nama_belakang" class="form-control" id="nama_belakang">
+                        <input type="text" name="nama_belakang" class="form-control" id="nama_belakang" value="{{ old('nama_belakang') }}">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}">
                     </div>
+                    @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
                         <label for="jenis_kelamin">Jenis Kelamin</label>
                         <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                            <option value="L">Laki-Laki</option>
-                            <option value="P">Perempuan</option>
+                            <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                            <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="agama">Agama</label>
-                        <input type="text" name="agama" class="form-control" id="agama">
+                        <input type="text" name="agama" class="form-control @error('agama') is-invalid @enderror" id="agama" value="{{ old('agama') }}">
                     </div>
+                    @error('agama')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
-                        <textarea name="alamat" id="alamat" rows="3" class="form-control"></textarea>
+                        <textarea name="alamat" id="alamat" rows="3" class="form-control">{{ old('alamat') }}</textarea>
                     </div>
             </div>
             <div class="modal-footer">
