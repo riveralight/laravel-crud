@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -83,6 +84,31 @@ class SiswaController extends Controller
 
     public function profile($id){
         $siswa = Siswa::findOrFail($id);
-        return view('siswa.profile', ['siswa' => $siswa]);
+        $matapelajaran = Mapel::all();
+
+        //menyiapkan data untuk chart
+        $categories = [];
+        $data = [];
+
+        foreach( $matapelajaran as $mp){
+            // cek apakah memiliki nilai pelajaran yang di looping
+            if($siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()){
+                $categories[] = $mp->nama;
+                $data[] = $siswa->mapel()->wherePivot('mapel_id',$mp->id)->first()->pivot->nilai;
+            }   
+        }   
+        // dd($data);
+
+        return view('siswa.profile', ['siswa' => $siswa, 'matapelajaran' => $matapelajaran, 'categories' => $categories, 'data' => $data]);
+    }
+
+    public function addNilai(Request $request, $id){
+        $siswa = Siswa::find($id);
+        if($siswa->mapel()->where('mapel_id', $request->mapel)->exists()){
+            return redirect('/siswa/'.$id.'/profile')->with('error', 'Data mata pelajaran sudah ada!');
+        }
+        $siswa->mapel()->attach($request->mapel, ['nilai' => $request->nilai]);
+
+        return redirect('/siswa/'.$id.'/profile')->with('pesan', 'Data nilai berhasil dimasukkan!');
     }
 }

@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function(){
     Route::patch('/siswa/{siswa}', 'SiswaController@update')->name('siswa.update');
     Route::get('/siswa/{id}/hapus', 'SiswaController@delete');
     Route::get('/siswa/{id}/profile', 'SiswaController@profile');
+    Route::post('/siswa/{id}/addnilai', 'SiswaController@addNilai');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:admin,siswa']], function(){
