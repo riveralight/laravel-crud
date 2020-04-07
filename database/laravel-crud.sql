@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2020 at 05:11 AM
+-- Generation Time: Apr 07, 2020 at 10:39 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -58,7 +58,8 @@ CREATE TABLE `mapel` (
 
 INSERT INTO `mapel` (`id`, `kode`, `nama`, `semester`, `created_at`, `updated_at`) VALUES
 (1, 'M001', 'Matematika Diskrit', 'ganjil', '2020-04-03 14:41:56', '0000-00-00 00:00:00'),
-(2, 'BI001', 'Bahasa Indonesia', 'ganjil', '2020-04-03 14:41:56', '0000-00-00 00:00:00');
+(2, 'BI001', 'Bahasa Indonesia', 'ganjil', '2020-04-03 14:41:56', '0000-00-00 00:00:00'),
+(3, 'AG001', 'Agama Islam', 'genap', '2020-04-07 04:49:26', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,19 @@ INSERT INTO `mapel_siswa` (`id`, `siswa_id`, `mapel_id`, `nilai`, `created_at`, 
 (2, 14, 2, 80, '2020-04-03 14:43:18', '0000-00-00 00:00:00'),
 (3, 15, 2, 90, '2020-04-03 14:59:30', '0000-00-00 00:00:00'),
 (4, 17, 1, 80, '2020-04-05 09:52:14', '2020-04-05 16:52:14'),
-(5, 17, 2, 75, '2020-04-05 09:59:39', '2020-04-05 16:59:39');
+(5, 17, 2, 75, '2020-04-05 09:59:39', '2020-04-05 16:59:39'),
+(6, 15, 1, 90, '2020-04-06 21:28:09', '2020-04-07 04:28:09'),
+(8, 18, 3, 70, '2020-04-07 04:54:24', '0000-00-00 00:00:00'),
+(9, 18, 1, 78, '2020-04-07 05:05:09', '0000-00-00 00:00:00'),
+(10, 18, 2, 90, '2020-04-07 05:05:09', '0000-00-00 00:00:00'),
+(11, 15, 3, 87, '2020-04-06 22:10:41', '2020-04-07 05:10:41'),
+(12, 17, 3, 90, '2020-04-06 22:20:14', '2020-04-07 05:20:14'),
+(13, 19, 1, 76, '2020-04-06 22:23:16', '2020-04-07 05:23:16'),
+(14, 19, 2, 90, '2020-04-06 22:23:23', '2020-04-07 05:23:23'),
+(15, 19, 3, 80, '2020-04-06 22:23:32', '2020-04-07 05:23:32'),
+(16, 20, 2, 80, '2020-04-06 22:38:06', '2020-04-07 05:38:06'),
+(17, 20, 1, 35, '2020-04-06 22:38:17', '2020-04-07 05:38:17'),
+(18, 20, 3, 95, '2020-04-06 22:38:32', '2020-04-07 05:38:32');
 
 -- --------------------------------------------------------
 
@@ -146,7 +159,10 @@ CREATE TABLE `siswa` (
 INSERT INTO `siswa` (`id`, `user_id`, `nama_depan`, `nama_belakang`, `jenis_kelamin`, `agama`, `alamat`, `avatar`, `created_at`, `updated_at`) VALUES
 (14, 3, 'Aziel', 'Ilham', 'L', 'Islam', 'Magelang', 'laravel.png', '2020-03-29 19:14:43', '2020-04-03 07:25:32'),
 (15, 4, 'Felly', 'Hedriani Laily', 'P', 'Islam', 'Sentiong', '26025775_1939054686109042_1205040066438476757_o.jpg', '2020-04-03 07:58:59', '2020-04-03 08:01:08'),
-(17, 6, 'Aziz', 'Ghazali', 'L', 'Islam', 'Tangerang', '65996729_2204504922996635_2213358696744878080_n.jpg', '2020-04-05 05:27:09', '2020-04-05 09:59:19');
+(17, 6, 'Aziz', 'Ghazali', 'L', 'Islam', 'Jakarta Selatan', '65996729_2204504922996635_2213358696744878080_n.jpg', '2020-04-05 05:27:09', '2020-04-06 21:15:18'),
+(18, 7, 'Alica', 'Putri', 'P', 'Islam', 'Tangerang', '898ef7ace2f82938e9db1d923a0b3ded.jpg', '2020-04-06 21:29:39', '2020-04-06 22:36:58'),
+(19, 8, 'Hafif', 'Syah Risal', 'L', 'Islam', 'Semarang', 'avatar_1.jpg', '2020-04-06 22:22:41', '2020-04-06 22:22:54'),
+(20, 9, 'Saba', 'Banten', 'L', 'Islam', 'Rangkasbitung', NULL, '2020-04-06 22:37:50', '2020-04-06 22:37:50');
 
 -- --------------------------------------------------------
 
@@ -174,7 +190,10 @@ INSERT INTO `users` (`id`, `role`, `name`, `email`, `email_verified_at`, `passwo
 (2, 'admin', 'Fuad Muhammad Nur', 'fuadmuhammadn@gmail.com', NULL, '$2y$10$jrpIiwuakBYEwm6ACsthme0DJ0380w.C6xLl860TsVrnvwb6fY38i', 'Cv9AOD3qg9du4A3VXnQSJbBItD9tas625n77PWvpguxK6W2pxFINRG2AwUzA', '2020-03-26 20:25:59', '2020-03-26 20:25:59'),
 (3, 'siswa', 'Aziel', 'Ilham@gmail.com', NULL, '$2y$10$WyRkiR8hA1u6QpnzGL9cMebfc1VCQvysojZQQCZW8bgwrO14IaFiO', 'fRPbEQweDUZvuOj736Ump1AR6IkQ99TLGQsWMtmSpDFO1eE994iaLjWMsz58', '2020-03-29 19:14:43', '2020-03-29 19:14:43'),
 (4, 'siswa', 'Angelina', 'angelivira@gmail', NULL, '$2y$10$YaT8XRklmQQLl6tNSgp47.CTlxDcwoXZJUN6ohy11q0n2WGUXjf2q', 'NjxmokcllbJsPMKeAcjAkXCNjeb1cK6Ib02e7bvt3bYzuoeH96LKTDqNk7pr', '2020-04-03 07:58:59', '2020-04-03 07:58:59'),
-(6, 'siswa', 'Aziz', 'aziz@gmail.com', NULL, '$2y$10$rZSBU8Qx8z9ZhceYBfMHse2PhB2Ah4MPmCP46rBDAvw8ukugOotZK', '1iLg6skltuxmXz78VsL2SgvLC0sbdw3SvuBjSdYfYIxdj8Slsvh1yTP9ozdi', '2020-04-05 05:27:09', '2020-04-05 05:27:09');
+(6, 'siswa', 'Aziz', 'aziz@gmail.com', NULL, '$2y$10$rZSBU8Qx8z9ZhceYBfMHse2PhB2Ah4MPmCP46rBDAvw8ukugOotZK', '1iLg6skltuxmXz78VsL2SgvLC0sbdw3SvuBjSdYfYIxdj8Slsvh1yTP9ozdi', '2020-04-05 05:27:09', '2020-04-05 05:27:09'),
+(7, 'siswa', 'Alica', 'alica@gmail.com', NULL, '$2y$10$FyS8Iv/lRETPU82fVaHjbuaeBUVaAp7MgSw34jJlW4XNwWH4zpHiS', 'wGIfugjPA1fJwadWw6yCQnwDugW1NHMqUHUCoBnkTWOxbZuAB4m1a1BTg5qS', '2020-04-06 21:29:39', '2020-04-06 21:29:39'),
+(8, 'siswa', 'Hafif', 'hafif@gmail.com', NULL, '$2y$10$PS2viimvW4xKbO.zJ4Dg7O8Vbcx4FFJ12FNPsg9J3zPtPvPDrjjVW', 'tKHEGGHMaoFQgav0XDPJbQTLAY4mpiicvaO2Tkvx3837gZnEyQn4Q9YBMoOD', '2020-04-06 22:22:41', '2020-04-06 22:22:41'),
+(9, 'siswa', 'Saba', 'sababanten@gmail.com', NULL, '$2y$10$mCk.cX5ZLqads6fZqtkA6.67SGi9ZUixTie1y7fid.yDvFJmBE8wK', 'K1G9xjGEjZ36QMOQXGAfqKcLlzITREL20KZ3A69wOiKv5BFK5lQpqG3CthwM', '2020-04-06 22:37:50', '2020-04-06 22:37:50');
 
 --
 -- Indexes for dumped tables
@@ -237,13 +256,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mapel_siswa`
 --
 ALTER TABLE `mapel_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -255,13 +274,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
